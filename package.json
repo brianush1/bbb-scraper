@@ -1,0 +1,22 @@
+{
+  "name": "scrape-bbb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "scrape_bbb_ppt.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify scrape_bbb_ppt.js > bundle.js; uglifyjs bundle.js -o bundle.min.js --mangle; cat header > userscript.js; cat bundle.min.js >> userscript.js; echo \"})();\" >> userscript.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "blob-stream": "^0.1.3",
+    "pdfkit": "^0.11.0",
+    "svg-to-pdfkit": "^0.1.8"
+  },
+  "devDependencies": {
+    "brfs": "^2.0.2",
+    "browserify": "^17.0.0",
+    "uglify-es": "github:mishoo/UglifyJS2#harmony"
+  }
+}
