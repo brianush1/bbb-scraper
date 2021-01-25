@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Scrape BBB
-// @namespace    http://tampermonkey.net/
+// @namespace    https://github.com/brianush1
 // @version      0.1
 // @description  Scrapes BBB presentations
 // @author       You

@@ -5,7 +5,7 @@
   "main": "scrape_bbb_ppt.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "browserify scrape_bbb_ppt.js > bundle.js; uglifyjs bundle.js -o bundle.min.js --mangle; cat header > userscript.js; cat bundle.min.js >> userscript.js; echo \"})();\" >> userscript.js"
+    "build": "browserify scrape_bbb_ppt.js > bundle.js; uglifyjs bundle.js -o bundle.min.js --mangle; cat header > userscript.user.js; cat bundle.min.js >> userscript.user.js; echo \"})();\" >> userscript.user.js"
   },
   "author": "",
   "license": "ISC",
