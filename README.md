@@ -1,0 +1,1 @@
+[Install](https://raw.githubusercontent.com/brianush1/bbb-scraper/master/userscript.user.js)
