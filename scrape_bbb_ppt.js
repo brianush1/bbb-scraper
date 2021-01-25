@@ -2,8 +2,14 @@ const PDFDocument = require("pdfkit");
 const SVGtoPDF = require("svg-to-pdfkit");
 const blobStream = require("blob-stream");
 
+const btn = document.createElement("button");
 window.scrapey = function() {
-	let base = document.querySelector("image").getAttribute("xlink:href");
+	const img = document.querySelector("image");
+	if (!img) {
+		alert("There is no presentation currently loaded");
+		return;
+	}
+	let base = img.getAttribute("xlink:href");
 	base = base.substring(0, base.lastIndexOf("/") + 1);
 	const cache = new Map;
 	async function download(slide) {
@@ -49,9 +55,12 @@ window.scrapey = function() {
 		}
 	}
 	(async () => {
+		btn.setAttribute("disabled", "");
+		btn.innerText = "Finding last slide...";
 		const lastSlide = await findLastSlide();
 
 		const parser = new DOMParser();
+		btn.innerText = "Getting page size...";
 		const svg1 = parser.parseFromString(await download(1), "image/svg+xml").querySelector("svg");
 		const width = parseSize(svg1.getAttribute("width"));
 		const height = parseSize(svg1.getAttribute("height"));
@@ -69,10 +78,13 @@ window.scrapey = function() {
 			if (slide > 1) {
 				doc.addPage();
 			}
+			btn.innerText = `Writing slide ${slide}/${lastSlide}`;
 			const data = await download(slide);
 			SVGtoPDF(doc, data, 0, 0);
 		}
 		doc.end();
+		btn.innerText = "Save Presentation";
+		btn.removeAttribute("disabled");
 		stream.on("finish", () => {
 			const a = document.createElement("a");
 			a.style.display = "none";
@@ -95,3 +107,11 @@ window.scrapey = function() {
 		});
 	})();
 };
+btn.innerText = "Save Presentation";
+btn.style.right = "8px";
+btn.style.bottom = "8px";
+btn.style.position = "absolute";
+btn.addEventListener("click", () => {
+	window.scrapey();
+});
+document.body.appendChild(btn);

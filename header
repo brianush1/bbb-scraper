@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Scrape BBB
 // @namespace    https://github.com/brianush1
-// @version      0.1
+// @version      0.2
 // @description  Scrapes BBB presentations
 // @author       You
 // @match        *://*.blindsidenetworks.com/html5client/join*
